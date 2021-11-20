@@ -132,22 +132,8 @@ class SparseMatrix(
         return rel
     }
 
-    fun print() {
-        println("row = $row , column = $col")
-        for (i in 0 until len) {
-            print(data[i][0])
-            print(" ")
-            print(data[i][1])
-            print(" ")
-            print(data[i][2])
-            println()
-        }
-    }
-
-    fun get_input1(): SparseMatrix
+    fun get_input1(data : String): SparseMatrix
     {
-        println("enter matrix : ")
-        val data: String = readLine().toString()
 
         val row = data.split("/")
         val column = row[0].split(" ")
@@ -184,11 +170,8 @@ class SparseMatrix(
         return a
     }
 
-    fun get_input2(): SparseMatrix
+    fun get_input2(data2 : String): SparseMatrix
     {
-        println("enter matrix : ")
-        val data2: String = readLine().toString()
-
         val row2 = data2.split("/")
         val column2 = row2[0].split(" ")
 
@@ -221,6 +204,17 @@ class SparseMatrix(
         return b
     }
 
+    fun print() {
+        println("row = $row , column = $col")
+        for (i in 0 until len) {
+            print(data[i][0])
+            print(" ")
+            print(data[i][1])
+            print(" ")
+            print(data[i][2])
+            println()
+        }
+    }
 
     fun print_matrix(rel : SparseMatrix)
     {
@@ -256,19 +250,19 @@ class SparseMatrix(
     }
 
 
-
     companion object {
         @JvmStatic
         fun main(argv: Array<String>) { // for unit test
 
-            val x = SparseMatrix(1,1)
-            val a = x.get_input1()
-            val b = x.get_input2()
+//            val x = SparseMatrix(1,1)
+//            val a = x.get_input1()
+//            val b = x.get_input2()
+//
 
-            val rel = a.minus(b)
-            rel.print()
-            println("-------------------------")
-            x.print_matrix(rel)
+//            val rel = a.minus(b)
+//            rel.print()
+//            println("-------------------------")
+//            x.print_matrix(rel)
 
             // 4 9 0 / 4 6 2
             // 0 3 0 / 0 0 9

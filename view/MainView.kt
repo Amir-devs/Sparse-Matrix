@@ -1,6 +1,7 @@
 package com.example.view
 
 import com.example.model.SparseMatrix
+import javafx.scene.layout.VBox
 import tornadofx.*
 
 class MainView : View("Hello TornadoFX") {
@@ -30,6 +31,7 @@ class MainView : View("Hello TornadoFX") {
 
     val calculate = button {
         text = "Calculate"
+        action { resault() }
     }
 
     val matrix1 = textfield {
@@ -61,11 +63,29 @@ class MainView : View("Hello TornadoFX") {
 
     val menu_vbox = vbox {  }
 
+    fun resault()
+    {
+        if ( operator == "/" )
+        {
 
-    override val root = anchorpane {
+        }
+        else
+        {
+            val x = SparseMatrix(1,1)
+            val a = x.get_input1(matrix1.text)
+            val b = x.get_input2(matrix2.text)
 
-        setPrefSize(400.0 , 300.0 )
+            val rel = a.minus(b)
+            rel.print()
+            println("-------------------------")
+            x.print_matrix(rel)
 
+            val n = Show_sparse()
+            n.openWindow()
+        }
+    }
+
+    fun add_menu(): VBox {
         menu_vbox.add( label { text = "What do you want to do ?" } )
         menu_vbox.add( hbox {
             add( sum )
@@ -73,9 +93,21 @@ class MainView : View("Hello TornadoFX") {
             add( multiply )
             add( transpose )
         })
-        add(menu_vbox)
+
+        return menu_vbox
+    }
+
+
+
+    override val root = anchorpane {
+
+        setPrefSize(400.0 , 300.0 )
+        add( add_menu() )
+
 
 
     }
+
+
 
 }
