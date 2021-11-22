@@ -12,7 +12,7 @@ class SparseMatrix(
     val result_list2 = mutableListOf<String>()
 
 
-    private var data = Array(10) { IntArray(3) }
+    private var data = Array(100 ) { IntArray(3) }
     // useful length of data ( terms )
     private var len = 0
 
@@ -232,7 +232,8 @@ class SparseMatrix(
 
     fun print_matrix(rel : SparseMatrix): MutableList<String> {
         var temp = 0
-        for ( i in 0..row_size )
+        println("row = $row , column = $col")
+        for ( i in 0..row_size-1 )
         {
             for ( j in 0..column_size )
             {
@@ -250,17 +251,17 @@ class SparseMatrix(
                     print(" , ")
                 }
 
-                if ( temp == rel.len )
-                {
-                    break
-                }
+//                if ( temp == rel.len )
+//                {
+//                    break
+//                }
             }
 
             result_list2.add( "\n" )
-            if ( temp == rel.len )
-            {
-                break
-            }
+//            if ( temp == rel.len )
+//            {
+//                break
+//            }
             println()
         }
 

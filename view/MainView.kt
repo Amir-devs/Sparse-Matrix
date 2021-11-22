@@ -34,13 +34,9 @@ class MainView : View("Hello TornadoFX") {
         action { resault() }
     }
 
-    val matrix1 = textfield {
+    val matrix1 = textfield { }
 
-    }
-
-    val matrix2 = textfield {
-
-    }
+    val matrix2 = textfield { }
 
     fun show_field()
     {
@@ -61,31 +57,88 @@ class MainView : View("Hello TornadoFX") {
 
     }
 
-    val menu_vbox = vbox {  }
+    val menu_vbox = vbox { }
+
+    fun show_add()
+    {
+        val x = SparseMatrix(1,1)
+        val a = x.get_input1(matrix1.text)
+        val b = x.get_input2(matrix2.text)
+
+        val n = Show_sparse_terms()
+        val m = Show_sparse()
+
+        val rel = a.add(b)
+        n.show_result( rel.print() )
+        println("-------------------------")
+        m.show_result( x.print_matrix(rel) )
+
+        m.openWindow()
+        n.openWindow()
+    }
+
+    fun show_minus()
+    {
+        val x = SparseMatrix(1,1)
+        val a = x.get_input1(matrix1.text)
+        val b = x.get_input2(matrix2.text)
+
+        val n = Show_sparse_terms()
+        val m = Show_sparse()
+
+        val rel = a.minus(b)
+        n.show_result( rel.print() )
+        println("-------------------------")
+        m.show_result( x.print_matrix(rel) )
+
+        m.openWindow()
+        n.openWindow()
+    }
+
+    fun show_multiply()
+    {
+        val x = SparseMatrix(1,1)
+        val a = x.get_input1(matrix1.text)
+        val b = x.get_input2(matrix2.text)
+
+        val n = Show_sparse_terms()
+        val m = Show_sparse()
+
+        val rel = a.multiply(b)
+        n.show_result( rel.print() )
+        println("-------------------------")
+        m.show_result( x.print_matrix(rel) )
+
+        m.openWindow()
+        n.openWindow()
+    }
+
+    fun show_transpose()
+    {
+        val x = SparseMatrix(1,1)
+        val a = x.get_input1(matrix1.text)
+
+        val n = Show_sparse_terms()
+        val m = Show_sparse()
+
+        val rel = a.transpose()
+        n.show_result( rel.print() )
+        println("-------------------------")
+        m.show_result( x.print_matrix(rel) )
+
+        m.openWindow()
+        n.openWindow()
+    }
+
 
     fun resault()
     {
-        if ( operator == "/" )
+        when ( operator )
         {
-
-        }
-        else
-        {
-            val x = SparseMatrix(1,1)
-            val a = x.get_input1(matrix1.text)
-            val b = x.get_input2(matrix2.text)
-
-            val n = Show_sparse_terms()
-            val m = Show_sparse()
-
-            val rel = a.add(b)
-            n.show_result( rel.print() )
-            println("-------------------------")
-//            x.print_matrix(rel)
-            m.show_result( x.print_matrix(rel) )
-
-            m.openWindow()
-            n.openWindow()
+            "+" -> show_add()
+            "-" -> show_minus()
+            "*" -> show_multiply()
+            "/" -> show_transpose()
         }
     }
 

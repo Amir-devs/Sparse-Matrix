@@ -4,7 +4,10 @@ import tornadofx.*
 
 class Show_sparse : View("sparse") {
 
-    var l1 = label { text = "    " }
+    var l1 = label {
+        text = "    "
+        style = "-fx-font-size: 50px"
+    }
     fun show_result( print : MutableList<String>)
     {
         for ( i in print )
