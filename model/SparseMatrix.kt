@@ -5,6 +5,13 @@ class SparseMatrix(
     private var col: Int
 ) {
 
+    // result data ( terms )
+    val result_list = mutableListOf<String>()
+
+    // result data ( sparse )
+    val result_list2 = mutableListOf<String>()
+
+
     private var data = Array(10) { IntArray(3) }
     // useful length of data ( terms )
     private var len = 0
@@ -204,20 +211,26 @@ class SparseMatrix(
         return b
     }
 
-    fun print() {
+    fun print(): MutableList<String> {
+
         println("row = $row , column = $col")
         for (i in 0 until len) {
             print(data[i][0])
             print(" ")
+            result_list.add(data[i][0].toString())
             print(data[i][1])
             print(" ")
+            result_list.add(data[i][1].toString())
             print(data[i][2])
             println()
+            result_list.add(data[i][2].toString())
+            result_list.add("\n")
         }
+
+        return result_list
     }
 
-    fun print_matrix(rel : SparseMatrix)
-    {
+    fun print_matrix(rel : SparseMatrix): MutableList<String> {
         var temp = 0
         for ( i in 0..row_size )
         {
@@ -226,12 +239,14 @@ class SparseMatrix(
                 if ( rel.data[temp][0] == i && rel.data[temp][1] == j )
                 {
                     print( rel.data[temp][2] )
+                    result_list2.add( rel.data[temp][2].toString() )
                     temp ++
                     print(" , ")
                 }
                 else
                 {
                     print(0)
+                    result_list2.add( "0" )
                     print(" , ")
                 }
 
@@ -241,12 +256,15 @@ class SparseMatrix(
                 }
             }
 
+            result_list2.add( "\n" )
             if ( temp == rel.len )
             {
                 break
             }
             println()
         }
+
+        return result_list2
     }
 
 

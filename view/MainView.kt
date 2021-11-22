@@ -75,12 +75,16 @@ class MainView : View("Hello TornadoFX") {
             val a = x.get_input1(matrix1.text)
             val b = x.get_input2(matrix2.text)
 
-            val rel = a.minus(b)
-            rel.print()
-            println("-------------------------")
-            x.print_matrix(rel)
+            val n = Show_sparse_terms()
+            val m = Show_sparse()
 
-            val n = Show_sparse()
+            val rel = a.add(b)
+            n.show_result( rel.print() )
+            println("-------------------------")
+//            x.print_matrix(rel)
+            m.show_result( x.print_matrix(rel) )
+
+            m.openWindow()
             n.openWindow()
         }
     }
