@@ -1,6 +1,8 @@
 package com.example.view
 
 import com.example.model.SparseMatrix
+import javafx.scene.control.ScrollBar
+import javafx.scene.control.ScrollPane
 import javafx.scene.layout.VBox
 import tornadofx.*
 
@@ -124,7 +126,7 @@ class MainView : View("Hello TornadoFX") {
         val rel = a.transpose()
         n.show_result( rel.print() )
         println("-------------------------")
-        m.show_result( x.print_matrix(rel) )
+        m.show_result( rel.print_matrix_transpose(rel) )
 
         m.openWindow()
         n.openWindow()
@@ -153,8 +155,6 @@ class MainView : View("Hello TornadoFX") {
 
         return menu_vbox
     }
-
-
 
     override val root = anchorpane {
 

@@ -1,8 +1,10 @@
 package com.example.model
 
+import java.lang.Exception
+
 class SparseMatrix(
-    private var row: Int, // size of the matrix
-    private var col: Int
+    var row: Int,
+    var col: Int
 ) {
 
     // result data ( terms )
@@ -27,121 +29,127 @@ class SparseMatrix(
     }
 
     fun add(b: SparseMatrix): SparseMatrix {
-        var aPos = 0
-        var bPos = 0
-        val tmp = SparseMatrix(row, col)
-        while (aPos < len && bPos < b.len) { // when none is empty, scan both matrix
-            if (data[aPos][0] > b.data[bPos][0] || data[aPos][0] == b.data[bPos][0] && data[aPos][1] > b.data[bPos][1]) { // b smaller
+        var a_index = 0
+        var b_index = 0
+        val temp = SparseMatrix(row, col)
+        while (a_index < len && b_index < b.len) { // when none is empty, scan both matrix
+            if (data[a_index][0] > b.data[b_index][0] || data[a_index][0] == b.data[b_index][0] && data[a_index][1] > b.data[b_index][1]) { // b smaller
                 // copy b to new matrix
-                tmp.addData(b.data[bPos][0], b.data[bPos][1], b.data[bPos][2])
-                bPos++
-            } else if (data[aPos][0] < b.data[bPos][0] || data[aPos][0] == b.data[bPos][0] && data[aPos][1] < b.data[bPos][1]) { // a smaller
+                temp.addData(b.data[b_index][0], b.data[b_index][1], b.data[b_index][2])
+                b_index++
+            } else if (data[a_index][0] < b.data[b_index][0] || data[a_index][0] == b.data[b_index][0] && data[a_index][1] < b.data[b_index][1]) { // a smaller
                 // copy a to new matrix
-                tmp.addData(data[aPos][0], data[aPos][1], data[aPos][2])
-                aPos++
+                temp.addData(data[a_index][0], data[a_index][1], data[a_index][2])
+                a_index++
             } else { // data at aPos and bPos are the same row and column
-                val rel = data[aPos][2] + b.data[bPos][2]
-                if (rel != 0) tmp.addData(data[aPos][0], data[aPos][1], rel)
-                aPos++
-                bPos++
+                val rel = data[a_index][2] + b.data[b_index][2]
+                if (rel != 0) temp.addData(data[a_index][0], data[a_index][1], rel)
+                a_index++
+                b_index++
             }
         }
         // copy remain data
-        while (aPos < len)
+        while (a_index < len)
         {
-            tmp.addData(data[aPos][0], data[aPos][1], data[aPos++][2])
+            temp.addData(data[a_index][0], data[a_index][1], data[a_index++][2])
         }
-        while (bPos < b.len)
+        while (b_index < b.len)
         {
-            tmp.addData(b.data[bPos][0], b.data[bPos][1], b.data[bPos++][2])
+            temp.addData(b.data[b_index][0], b.data[b_index][1], b.data[b_index++][2])
         }
-        return tmp
+        return temp
     }
 
     fun minus(b: SparseMatrix): SparseMatrix {
-        var aPos = 0
-        var bPos = 0
-        val tmp = SparseMatrix(row, col)
-        while (aPos < len && bPos < b.len) { // when none is empty, scan both matrix
-            if (data[aPos][0] > b.data[bPos][0] || data[aPos][0] == b.data[bPos][0] && data[aPos][1] > b.data[bPos][1]) { // b smaller
+        var a_index = 0
+        var b_index = 0
+        val temp = SparseMatrix(row, col)
+        while (a_index < len && b_index < b.len) { // when none is empty, scan both matrix
+            if (data[a_index][0] > b.data[b_index][0] || data[a_index][0] == b.data[b_index][0] && data[a_index][1] > b.data[b_index][1]) { // b smaller
                 // copy b to new matrix
-                tmp.addData(b.data[bPos][0], b.data[bPos][1], b.data[bPos][2])
-                bPos++
-            } else if (data[aPos][0] < b.data[bPos][0] || data[aPos][0] == b.data[bPos][0] && data[aPos][1] < b.data[bPos][1]) { // a smaller
+                temp.addData(b.data[b_index][0], b.data[b_index][1], b.data[b_index][2])
+                b_index++
+            } else if (data[a_index][0] < b.data[b_index][0] || data[a_index][0] == b.data[b_index][0] && data[a_index][1] < b.data[b_index][1]) { // a smaller
                 // copy a to new matrix
-                tmp.addData(data[aPos][0], data[aPos][1], data[aPos][2])
-                aPos++
+                temp.addData(data[a_index][0], data[a_index][1], data[a_index][2])
+                a_index++
             } else { // data at aPos and bPos are the same row and column
-                val rel = data[aPos][2] - b.data[bPos][2]
-                if (rel != 0) tmp.addData(data[aPos][0], data[aPos][1], rel)
-                aPos++
-                bPos++
+                val rel = data[a_index][2] - b.data[b_index][2]
+                if (rel != 0) temp.addData(data[a_index][0], data[a_index][1], rel)
+                a_index++
+                b_index++
             }
         }
         // copy remain data
-        while (aPos < len)
+        while (a_index < len)
         {
-            tmp.addData(data[aPos][0], data[aPos][1], data[aPos++][2])
+            temp.addData(data[a_index][0], data[a_index][1], data[a_index++][2])
         }
-        while (bPos < b.len)
+        while (b_index < b.len)
         {
-            tmp.addData(b.data[bPos][0], b.data[bPos][1], b.data[bPos++][2])
+            temp.addData(b.data[b_index][0], b.data[b_index][1], b.data[b_index++][2])
         }
-        return tmp
+        return temp
     }
 
     fun transpose(): SparseMatrix {
-        val tmp = SparseMatrix(col, row)
-        tmp.data = Array(len) { IntArray(3) }
-        tmp.len = len
-        tmp.row = col
-        tmp.col = row
+        val temp = SparseMatrix(col, row)
+        temp.data = Array(len) { IntArray(3) }
+        temp.len = len
+        temp.row = col
+        temp.col = row
         val count = IntArray(col) // count[i]: how many data in column i
-        for (i in 0 until len) count[data[i][1]]++
-        val index = IntArray(col) // index[i]: how many data have column smaller than i
-        for (i in 1 until col) index[i] = index[i - 1] + count[i - 1]
-        for (i in 0 until len) {
-            val insertPos = index[data[i][1]]++ // a new data inserted, so shift insertion point
-            tmp.data[insertPos][0] = data[i][1] // transpose
-            tmp.data[insertPos][1] = data[i][0] // transpose
-            tmp.data[insertPos][2] = data[i][2] // copy data
+        for (i in 0 until len)
+        {
+            count[data[i][1]]++
         }
-        return tmp
+        val index = IntArray(col) // index[i]: how many data have column smaller than i
+        for (i in 1 until col)
+        {
+            index[i] = index[i - 1] + count[i - 1]
+        }
+        for (i in 0 until len)
+        {
+            val insertPos = index[data[i][1]]++ // a new data inserted
+            temp.data[insertPos][0] = data[i][1] // transpose
+            temp.data[insertPos][1] = data[i][0] // transpose
+            temp.data[insertPos][2] = data[i][2] // copy data
+        }
+        return temp
     }
 
     fun multiply(x: SparseMatrix): SparseMatrix {
         val b = x.transpose()
-        var aPos: Int
-        var bPos: Int
+        var a_index : Int
+        var b_index : Int
         val rel = SparseMatrix(row, b.row)
-        aPos = 0
-        while (aPos < len) {
-            val r = data[aPos][0] // current row
-            bPos = 0
-            while (bPos < b.len) {
-                val c = b.data[bPos][0] // current column
-                var scanA = aPos
-                var scanB = bPos
+        a_index = 0
+        while (a_index < len) {
+            val r = data[a_index][0] // current row
+            b_index = 0
+            while (b_index < b.len) {
+                val c = b.data[b_index][0] // current column
+                var scanA = a_index
+                var scanB = b_index
                 var sum = 0
                 while (scanA < len && data[scanA][0] == r && scanB < b.len && b.data[scanB][0] == c) { // calculate rel[r][c]
                     if (data[scanA][1] < b.data[scanB][1]) // scanB has larger column
                         scanA++ // skip a
                     else if (data[scanA][1] > b.data[scanB][1]) // scanA has larger column
                         scanB++ // skip b
-                    else  // same column, so they can multiply
+                    else  // same column, can multiply
                         sum += data[scanA++][2] * b.data[scanB++][2]
                 }
                 if (sum != 0) rel.addData(r, c, sum)
-                while (bPos < b.len && b.data[bPos][0] == c) bPos++ // jump to next column
+                while (b_index < b.len && b.data[b_index][0] == c) b_index++ // jump to next column
             }
-            while (aPos < len && data[aPos][0] == r) aPos++ // jump to next row
+            while (a_index < len && data[a_index][0] == r) a_index++ // jump to next row
         }
         return rel
     }
 
     fun get_input1(data : String): SparseMatrix
     {
-
         val row = data.split("/")
         val column = row[0].split(" ")
 
@@ -232,7 +240,6 @@ class SparseMatrix(
 
     fun print_matrix(rel : SparseMatrix): MutableList<String> {
         var temp = 0
-        println("row = $row , column = $col")
         for ( i in 0..row_size-1 )
         {
             for ( j in 0..column_size )
@@ -264,6 +271,45 @@ class SparseMatrix(
 //            }
             println()
         }
+
+        return result_list2
+    }
+
+    fun print_matrix_transpose(rel : SparseMatrix): MutableList<String> {
+        var temp = 0
+        println("row = $row , column = $col")
+        try {
+            for ( i in 0..row-1 )
+            {
+                for ( j in 0..col-1 )
+                {
+                    if ( rel.data[temp][0] == i && rel.data[temp][1] == j )
+                    {
+                        print( rel.data[temp][2] )
+                        result_list2.add( rel.data[temp][2].toString() )
+                        temp ++
+                        print(" , ")
+                    }
+                    else
+                    {
+                        print(0)
+                        result_list2.add( "0" )
+                        print(" , ")
+                    }
+                }
+
+                result_list2.add( "\n" )
+                println()
+            }
+
+        } catch ( e : Exception )
+        {
+
+        }
+
+            result_list2.add( "\n" )
+
+            println()
 
         return result_list2
     }

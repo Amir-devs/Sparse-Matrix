@@ -1,12 +1,14 @@
 package com.example.view
 
+import javafx.scene.control.ScrollBar
 import tornadofx.*
 
 class Show_sparse_terms : View("terms") {
 
+
     var l1 = label {
         text = "    "
-        style = "-fx-font-size: 50px"
+        style = "-fx-font-size: 15px"
     }
 
     fun show_result( print : MutableList<String>)
@@ -32,8 +34,6 @@ class Show_sparse_terms : View("terms") {
     }
 
     override val root = anchorpane {
-
-        setPrefSize(400.0 , 300.0 )
 
     }
 
