@@ -20,7 +20,7 @@ class Show_sparse_terms : View("terms") {
             {
                 l1.text += "   "
             }
-            else if ( i.length > 1 )
+            else if ( i.length > 9 )
             {
                 l1.text += "   "
             } else

@@ -119,7 +119,10 @@ class SparseMatrix(
     }
 
     fun multiply(x: SparseMatrix): SparseMatrix {
+
         val b = x.transpose()
+        eror_handler( col , b.col )
+
         var a_index : Int
         var b_index : Int
         val rel = SparseMatrix(row, b.row)
@@ -146,6 +149,16 @@ class SparseMatrix(
             while (a_index < len && data[a_index][0] == r) a_index++ // jump to next row
         }
         return rel
+    }
+
+    fun eror_handler(x : Int , y : Int)
+    {
+        if ( x != y )
+        {
+            println("first matrix column not match to second matrix row !!")
+            System.exit(0)
+        }
+
     }
 
     fun get_input1(data : String): SparseMatrix

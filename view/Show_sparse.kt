@@ -1,6 +1,5 @@
 package com.example.view
 
-import javafx.scene.control.ScrollBar
 import tornadofx.*
 
 class Show_sparse : View("sparse") {
@@ -19,7 +18,7 @@ class Show_sparse : View("sparse") {
             {
                 l1.text += "   "
             }
-            else if ( i.length > 1 )
+            else if ( i.length > 9 )
             {
                 l1.text += "   "
             } else
